@@ -1,0 +1,935 @@
+{
+  "generatedAt": "2026-06-28T14:06:41.742Z",
+  "collections": [
+    {
+      "name": "users",
+      "type": "auth",
+      "apiRules": {
+        "list": "id = @request.auth.id",
+        "view": "id = @request.auth.id",
+        "create": "",
+        "update": "id = @request.auth.id",
+        "delete": "id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "avatar",
+          "type": "file",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE UNIQUE INDEX `idx_tokenKey__pb_users_auth_` ON `users` (`tokenKey`)",
+        "CREATE UNIQUE INDEX `idx_email__pb_users_auth_` ON `users` (`email`) WHERE `email` != ''"
+      ]
+    },
+    {
+      "name": "directions",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "mission_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "medal_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "model_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "projects",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "area",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Marketing",
+            "Vendas",
+            "Produto",
+            "Operações",
+            "Pessoas",
+            "Capital"
+          ]
+        },
+        {
+          "name": "pgg_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "pmv_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "is_domino",
+          "type": "bool",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "planned",
+            "in_progress",
+            "completed"
+          ]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "problems",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "area",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Marketing",
+            "Vendas",
+            "Produto",
+            "Operações",
+            "Pessoas",
+            "Capital"
+          ]
+        },
+        {
+          "name": "scg_json",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "companies",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "type",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Startup",
+            "Lifestyle/Boutique"
+          ]
+        },
+        {
+          "name": "founder",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "quarters",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "year",
+          "type": "number",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "quarter_number",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "T1",
+            "T2",
+            "T3",
+            "T4"
+          ]
+        },
+        {
+          "name": "company_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "companies"
+        },
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "directions_structured",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "company_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "companies"
+        },
+        {
+          "name": "mission_statement",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "transformation",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "target_customer",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "behaviors",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "medal_scene_type",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "Capital",
+            "Liberdade",
+            "Reconhecimento"
+          ]
+        },
+        {
+          "name": "medal_scene_description",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "ideal_monday",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "what_stops_doing",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "team_size",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "expected_revenue",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "expected_profit",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "annual_revenue",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "annual_profit",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "area_models",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "quarter_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "quarters"
+        },
+        {
+          "name": "area",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Marketing",
+            "Vendas",
+            "Produto",
+            "Operações"
+          ]
+        },
+        {
+          "name": "contribution_goal",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "primary_indicator",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "pggs",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "quarter_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "quarters"
+        },
+        {
+          "name": "area",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Marketing",
+            "Vendas",
+            "Produto",
+            "Operações"
+          ]
+        },
+        {
+          "name": "is_domino",
+          "type": "bool",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "controllable_action",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "courageous_result",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "deadline",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "commitment_type",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "Social",
+            "Financeiro",
+            "Ambiente"
+          ]
+        },
+        {
+          "name": "commitment_description",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "full_phrase",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "Não iniciado",
+            "Em andamento",
+            "Concluído",
+            "Cancelado"
+          ]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_pggs_user_id ON pggs (user_id)"
+      ]
+    },
+    {
+      "name": "pmvs",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "pgg_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "pggs"
+        },
+        {
+          "name": "r1_result",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r2_reason",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r3_reference",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r4_direction",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r5_resources",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r6_restrictions",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r7_risks",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "r8_responsible",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_pmvs_user_id ON pmvs (user_id)",
+        "CREATE INDEX idx_pmvs_pgg_id ON pmvs (pgg_id)"
+      ]
+    },
+    {
+      "name": "scgs",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && user_id = @request.auth.id",
+        "view": "@request.auth.id != '' && user_id = @request.auth.id",
+        "create": "@request.auth.id != ''",
+        "update": "@request.auth.id != '' && user_id = @request.auth.id",
+        "delete": "@request.auth.id != '' && user_id = @request.auth.id"
+      },
+      "fields": [
+        {
+          "name": "user_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "company_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "companies"
+        },
+        {
+          "name": "diagnosis_date",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "bottleneck_area",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "Marketing",
+            "Vendas",
+            "Produto",
+            "Operações",
+            "Pessoas",
+            "Capital"
+          ]
+        },
+        {
+          "name": "symptom_description",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "symptom_magnitude",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "symptom_duration",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "causes_identified",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "bottleneck_identified",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "chosen_solution",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "validation_metric",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "status",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "Diagnóstico em andamento",
+            "Gargalo identificado",
+            "Solução em execução",
+            "Resolvido"
+          ]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_scgs_user_id ON scgs (user_id)"
+      ]
+    }
+  ]
+}
